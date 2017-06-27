@@ -1,6 +1,22 @@
+<style>
+  h1 {
+    background-color: rgba(100, 100, 100, 0.5);
+    height: 50px;
+  }
+  .count {
+    font-style: italic;
+  }
+</style>
+
 <h1>All Tasks</h1>
 
 <% @tasks.each do |task| %>
-<h3><a href="/tasks/<%= task.id %>"><%= task.title %></a></h3>
-  <p><%= task.description %></p>
+  <p class="count"> Task number <%= task.id %>: </p>
+  <h3><a href="/tasks/<%= task.id %>"> Current title: <%= task.title %></a></h3>
+  <p>Current description: <%= task.description %></p>
+  <p> Click <a href="/tasks/<%= task.id  %>/edit">here</a> to edit task title or description </p>
+  <form action="/tasks/<%= task.id %>" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="delete"/>
+  </form>
 <% end %>
